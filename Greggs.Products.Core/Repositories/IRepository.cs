@@ -10,11 +10,13 @@ namespace Greggs.Products.Core.Repositories
 {
     public interface IRepository<TEntity>  where TEntity : class
     {
-
+        TEntity Get(long entityId);
         Task<PagedList<TEntity>> GetPagedAsync(int page, int size);
 
         Task<PagedList<TEntity>> GetPagedAsync(Expression<Func<TEntity, bool>> predicate, int page, int size);
 
         Task<int> GetDataCountAsync(Expression<Func<TEntity, bool>> predicate);
+
+        void Add(TEntity entity);   
     }
 }

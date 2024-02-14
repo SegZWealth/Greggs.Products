@@ -23,6 +23,10 @@ namespace Greggs.Products.Infrastructure.Repositories
             _dbSet = Context.Set<TEntity>();
         }
 
+        public TEntity Get(long entityId)
+        {
+            return _dbSet.Find(entityId);
+        }
         public Task<PagedList<TEntity>> GetPagedAsync(int page, int size)
         {
             return GetPagedAsync(item => true, page, size);
@@ -47,6 +51,11 @@ namespace Greggs.Products.Infrastructure.Repositories
         public Task<int> GetDataCountAsync(Expression<Func<TEntity, bool>> predicate)
         {
             return _dbSet.CountAsync(predicate);
+        }
+
+        public void Add(TEntity entity) 
+        {
+            _dbSet.Add(entity);
         }
     }
 }

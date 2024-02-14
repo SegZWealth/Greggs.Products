@@ -34,4 +34,36 @@ public class ProductController : BaseController
             };
         });
     }
+
+
+    [HttpPost]
+    [Route("")]
+    public async Task<IServiceResponse<bool>> AddProduct(ProductDTO product)
+    {
+
+        return await HandleApiOperationAsync(async () =>
+        {
+            await _ProductSrvc.AddProduct(product);
+            return new ServiceResponse<bool>
+            {
+                Object = true
+            };
+        });
+    }
+
+
+    [HttpPut]
+    [Route("{ProductId}")]
+    public async Task<IServiceResponse<bool>> UpdateProduct(long ProductId, ProductDTO product) 
+    {
+
+        return await HandleApiOperationAsync(async () =>
+        {
+            await _ProductSrvc.UpdateProduct(ProductId, product);
+            return new ServiceResponse<bool>
+            {
+                Object = true
+            };
+        });
+    }
 }
